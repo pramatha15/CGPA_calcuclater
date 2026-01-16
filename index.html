@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPA Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: #1e1e1e;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #00ff9d;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #00cc7a;
+        }
+
+        .result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>GPA Calculator</h2>
+
+    <!-- Subject 1 -->
+    <input type="number" id="marks1" placeholder="Marks (0-100)">
+    <input type="number" id="credits1" placeholder="Credits">
+
+    <!-- Subject 2 -->
+    <input type="number" id="marks2" placeholder="Marks (0-100)">
+    <input type="number" id="credits2" placeholder="Credits">
+
+    <!-- Subject 3 -->
+    <input type="number" id="marks3" placeholder="Marks (0-100)">
+    <input type="number" id="credits3" placeholder="Credits">
+
+    <button onclick="calculateGPA()">Calculate GPA</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function gradePoint(marks) {
+        if (marks >= 90) return 10;
+        if (marks >= 80) return 9;
+        if (marks >= 70) return 8;
+        if (marks >= 60) return 7;
+        if (marks >= 50) return 6;
+        if (marks >= 40) return 5;
+        return 0;
+    }
+
+    function calculateGPA() {
+        let m1 = Number(marks1.value);
+        let c1 = Number(credits1.value);
+
+        let m2 = Number(marks2.value);
+        let c2 = Number(credits2.value);
+
+        let m3 = Number(marks3.value);
+        let c3 = Number(credits3.value);
+
+        let totalCredits = c1 + c2 + c3;
+
+        if (totalCredits === 0) {
+            result.innerHTML = "❌ Enter valid credits";
+            return;
+        }
+
+        let gpa =
+            (gradePoint(m1) * c1 +
+             gradePoint(m2) * c2 +
+             gradePoint(m3) * c3) / totalCredits;
+
+        result.innerHTML = "✅ GPA: " + gpa.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
